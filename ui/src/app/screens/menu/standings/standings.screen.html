@@ -1,0 +1,30 @@
+<div id='standings'>
+  <table>
+    <thead>
+      <tr>
+        <th rowspan="2">Name</th>
+        <th colspan="2">Group Stage</th>
+        <th colspan="2">Knockouts</th>
+        <th rowspan="2">Total</th>
+      </tr>
+      <tr>
+        <th>Results</th>
+        <th>Table</th>
+        <th>Results</th>
+        <th>Bracket</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let score of scores; let i = index">
+        <tr [ngClass]="{'odd': i%2 == 1, 'even': i%2 == 0}">
+          <td>{{score.name}}</td>
+          <td>{{score.groupResults}}</td>
+          <td>{{score.groupStandings}}</td>
+          <td>{{score.knockoutResults}}</td>
+          <td>{{score.knockoutStandings}}</td>
+          <td>{{score.total}}</td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>

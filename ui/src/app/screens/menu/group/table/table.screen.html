@@ -1,0 +1,67 @@
+<div class='table'>
+  <div class='headings'>
+    <div class='heading'>Prediction</div>
+    <div class='heading'>Actual</div>
+    <div class='heading'>Points</div>
+  </div>
+  <div *ngIf="entry" class='groups'>
+    <div class='prediction'>
+      <table *ngFor="let group of groups">
+        <thead>
+          <tr>
+            <th colspan="2">Group {{group}}</th>
+            <th>W</th>
+            <th>D</th>
+            <th>L</th>
+            <th>GF</th>
+            <th>GA</th>
+            <th>Pts</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let entry of getTable(group, 'prediction')">
+            <td><img src='{{entry.flag}}' /></td>
+            <td>{{entry.team}}</td>
+            <td>{{entry.wins}}</td>
+            <td>{{entry.draws}}</td>
+            <td>{{entry.losses}}</td>
+            <td>{{entry.goalsFor}}</td>
+            <td>{{entry.goalsAgainst}}</td>
+            <td>{{entry.points}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class='actual'>
+      <table *ngFor="let group of groups">
+        <thead>
+          <tr>
+            <th colspan="2">Team</th>
+            <th>W</th>
+            <th>D</th>
+            <th>L</th>
+            <th>GF</th>
+            <th>GA</th>
+            <th>Pts</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let entry of getTable(group, 'actual')">
+            <td><img src='{{entry.flag}}' /></td>
+            <td>{{entry.team}}</td>
+            <td>{{entry.wins}}</td>
+            <td>{{entry.draws}}</td>
+            <td>{{entry.losses}}</td>
+            <td>{{entry.goalsFor}}</td>
+            <td>{{entry.goalsAgainst}}</td>
+            <td>{{entry.points}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class='points'>
+      <div *ngFor="let group of groups" class='score'>
+        {{scoreGroup(group)}}
+      </div>
+  </div>
+</div>

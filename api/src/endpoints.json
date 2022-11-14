@@ -1,0 +1,25 @@
+{
+  "endpoints":[
+    {
+      "name":"Schedule Controller",
+      "path":"schedule",
+      "controller":"ScheduleController",
+      "roles":{},
+      "parameters":[]
+    },
+    {
+      "name":"Entry Collection",
+      "path":"entries",
+      "controller":"EntryCollection",
+      "roles":{},
+      "parameters":[]
+    },
+    {
+      "name":"Entry Resource",
+      "path":"entries/@",
+      "controller":"EntryResource",
+      "roles":{},
+      "parameters":[]
+    }
+  ]
+}

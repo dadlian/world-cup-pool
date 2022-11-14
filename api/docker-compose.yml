@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  pool.service:
+    container_name: pool.service
+    ports:
+      - 1313:80
+    restart: always
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    volumes:
+      - ./docker/nginx/logs:/var/log/nginx
+  php.local:
+    networks:
+      - default
+      - mysql
+    container_name: pool.service.php
+    restart: always
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+
+networks:
+  default:
+    driver: bridge
+  mysql:
+    external: true

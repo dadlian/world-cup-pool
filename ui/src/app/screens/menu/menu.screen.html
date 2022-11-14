@@ -1,0 +1,13 @@
+<div id='menu'>
+  <div class='wrapper'>
+    <div class='items'>
+      <div class='item' [ngClass]="{active: route == '/standings'}" [routerLink]="['/standings']">Standings</div>
+      <div class='item' [ngClass]="{active: route == '/group'}" [routerLink]="['/group']">Group Stage</div>
+      <div class='item' [ngClass]="{active: route == '/knockout'}" [routerLink]="['/knockout']">Knockouts</div>
+      <div class='item' [ngClass]="{active: route == '/scoring'}" [routerLink]="['/scoring']">Scoring</div>
+    </div>
+  </div>
+</div>
+<div id='page'>
+  <router-outlet></router-outlet>
+</div>

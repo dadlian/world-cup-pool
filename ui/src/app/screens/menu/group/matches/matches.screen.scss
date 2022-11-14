@@ -1,0 +1,126 @@
+.headers{
+  display: flex;
+  justify-content: flex-end;
+
+  .score{
+    width: 75px;
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.25em;
+  }
+}
+
+.match{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #CCCCCC;
+
+  .group,
+  .points{
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.25em;
+    width: 75px;
+  }
+
+  .date{
+    width: 175px;
+    font-size: 1.2em;
+  }
+
+  .team{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 175px;
+    font-size: 1.25em;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+
+    .name{
+      font-weight: bold;
+    }
+
+    .flag img{
+      margin-top: 2.5px;
+      width:30px;
+      height: 20px;
+    }
+  }
+
+  .team.pick{
+    background-color: #3384FF;
+    color: #FFFFFF;
+  }
+
+  .team.winner{
+    background-color: #33DD54;
+    color: #FFFFFF;
+  }
+
+  .team.loser{
+    background-color: #FF0000;
+    color: #FFFFFF;
+  }
+
+  .scores{
+    height: 135px;
+    width: 200px;
+
+    .title{
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .values{
+      width: 200px;
+      display: flex;
+      justify-content: space-around;
+
+      .score{
+        width: 75px;
+        text-align: center;
+        font-size: 1.4em;
+        font-weight: bold;
+      }
+    }
+
+    .prediction{
+      margin-bottom: 15px;
+
+      .score{
+        padding-left: 12.5px;
+      }
+    }
+  }
+}
+
+.panel{
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  margin: 25px 0px;
+
+  .button{
+    background-color: #3384ff;
+    color: #FFFFFF;
+    padding: 10px;
+    cursor: pointer;
+  }
+
+  .button:hover{
+    opacity: 0.8;
+  }
+}
+
+.message{
+  margin-top: 10px;
+  color: #1FDF64;
+  font-weight: bold;
+}

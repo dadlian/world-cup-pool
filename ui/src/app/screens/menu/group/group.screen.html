@@ -1,0 +1,6 @@
+<h1>{{entry}}'s Group Stage Entry</h1>
+<div class='submenu'>
+  <div [routerLink]="['matches']" [ngClass]="{active: route == '/group/matches'}" class='item'>Matches</div>
+  <div [routerLink]="['table']" [ngClass]="{active: route == '/group/table'}" class='item'>Table</div>
+</div>
+<router-outlet></router-outlet>

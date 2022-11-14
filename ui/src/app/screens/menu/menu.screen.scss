@@ -1,0 +1,34 @@
+#menu{
+  margin-bottom: 25px;
+
+  .wrapper{
+    background-color: #3384FF;
+
+    .items{
+      max-width: 400px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+
+      .item{
+        font-weight: bold;
+        color: #FFFFFF;
+        cursor: pointer;
+        opacity: 0.8;
+      }
+
+      .item:hover,
+      .item.active{
+        opacity: 1;
+      }
+    }
+  }
+}
+
+#page{
+  margin: 0 auto;
+  max-width: 1200px;
+  width: 100%
+}
