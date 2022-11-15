@@ -9,20 +9,15 @@ services:
     build:
       context: .
       dockerfile: docker/nginx/Dockerfile
-    volumes:
-      - ./docker/nginx/logs:/var/log/nginx
-  php.local:
-    networks:
-      - default
-      - mysql
+  pool.php:
     container_name: pool.service.php
     restart: always
     build:
       context: .
       dockerfile: docker/php/Dockerfile
-
-networks:
-  default:
-    driver: bridge
-  mysql:
-    external: true
+  pool.mysql:
+    container_name: "pool.service.mysql"
+    restart: "always"
+    build:
+      context: .
+      dockerfile: docker/mysql/Dockerfile

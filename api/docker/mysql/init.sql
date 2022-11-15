@@ -1,0 +1,4 @@
+CREATE DATABASE worldcup_pool;
+
+CREATE USER 'guest'@'%' IDENTIFIED WITH MYSQL_NATIVE_PASSWORD BY 'guest';
+GRANT ALL PRIVILEGES ON *.* TO 'guest'@'%';

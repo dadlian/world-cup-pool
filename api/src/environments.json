@@ -1,7 +1,7 @@
 {
   "development":{
     "database":{
-      "hostname":"mysql.local",
+      "hostname":"pool.mysql",
       "database":"worldcup_pool",
       "username":"guest",
       "password":"guest",
