@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpEvent, HttpHandler, HttpRequest, HttpInterceptor } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment'
 
-const API_ROOT = `http://localhost/cup_pool`;
+const API_ROOT = environment.api;
 
 @Injectable()
 export class RequestInterceptor implements HttpInterceptor{
