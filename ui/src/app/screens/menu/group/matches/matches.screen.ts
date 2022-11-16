@@ -10,6 +10,8 @@ export class MatchesScreen{
   public matches: Array<any>;
   public entry: any;
   public message: string;
+  public groups: Array<string>;
+  public activeGroup: string;
 
   private scores: any;
 
@@ -20,6 +22,9 @@ export class MatchesScreen{
       locked: false,
       group: []
     }
+
+    this.groups = ['A','B','C','D','E','F','G','H']
+    this.activeGroup = ''
 
     for(let i=0; i < 48; i++){
       this.entry.group[i] = {
@@ -58,15 +63,18 @@ export class MatchesScreen{
       })
   }
 
-  toggleWinner(match: number, winner: string){
+  updateWinner(match: any){
     if(this.entry.locked){
       return
     }
 
-    if(this.entry.group[match - 1].winner == winner){
-      this.entry.group[match - 1].winner = ""
-    }else{
-      this.entry.group[match - 1].winner = winner
+    let matchId = match.gameId - 1
+
+    this.entry.group[matchId].winner = ""
+    if(this.entry.group[matchId].homeScore > this.entry.group[matchId].awayScore){
+      this.entry.group[matchId].winner = match.homeTeam
+    }else if(this.entry.group[matchId].awayScore > this.entry.group[matchId].homeScore){
+      this.entry.group[matchId].winner = match.awayTeam
     }
   }
 
@@ -106,5 +114,9 @@ export class MatchesScreen{
     }
 
     return score
+  }
+
+  filterGroup(group: string = ""){
+    this.activeGroup = group
   }
 }

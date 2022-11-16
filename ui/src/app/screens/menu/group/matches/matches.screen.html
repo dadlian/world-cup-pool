@@ -6,49 +6,58 @@
   <div class='headers'>
     <div class='score'>Points</div>
   </div>
-  <div *ngFor="let match of matches" class="match">
-    <div class='group'>Group {{match.groupName}}</div>
-    <div class='date'>{{match.localDate | date:'dd MMM Y HH:mm'}}</div>
-    <div class='team' (click)="toggleWinner(match.gameId, match.homeTeam)"
-      [ngClass]="{
-        pick: match.homeTeam == entry?.group[match.gameId-1].winner,
-        winner: match.finished && match.homeTeam == entry?.group[match.gameId-1].winner && match.homeScore > match.awayScore,
-        loser: match.finished && match.homeTeam == entry?.group[match.gameId-1].winner && match.homeScore <= match.awayScore
-      }">
-      <div class='name'>{{match.homeTeam}}</div>
-      <div class='flag'>
-        <img src='{{match.homeFlag}}'>
-      </div>
-    </div>
-    <div class='scores'>
-      <div class='prediction'>
-        <div class='title'>Prediction</div>
-        <div class='values'>
-          <input class='score' type='number' [(ngModel)]='entry?.group[match.gameId-1].homeScore'>
-          <input class='score' type='number' [(ngModel)]='entry?.group[match.gameId-1].awayScore'>
-        </div>
-      </div>
-      <div class='actual'>
-        <div class='title'>Actual</div>
-        <div class='values'>
-          <div class='score'>{{match.homeScore}}</div>
-          <div class='score'>{{match.awayScore}}</div>
-        </div>
-      </div>
-    </div>
-    <div class='team' (click)="toggleWinner(match.gameId, match.awayTeam)"
-      [ngClass]="{
-        pick: match.awayTeam == entry?.group[match.gameId-1].winner,
-        winner: match.finished && match.awayTeam == entry?.group[match.gameId-1].winner && match.homeScore < match.awayScore,
-        loser: match.finished && match.awayTeam == entry?.group[match.gameId-1].winner && match.homeScore >= match.awayScore
-      }">
-      <div class='flag'>
-        <img src='{{match.awayFlag}}'>
-      </div>
-      <div class='name'>{{match.awayTeam}}</div>
-    </div>
-    <div class='points'>{{scoreMatch(match.gameId)}}</div>
+  <div class='groups'>
+    <div class='label'>Groups:</div>
+    <div class='group' [ngClass]="{active: !activeGroup }" (click)='filterGroup()'>All</div>
+    <div *ngFor="let group of groups" class="group"
+      [ngClass]="{active: group == activeGroup}"
+      (click)='filterGroup(group)'>{{group}}</div>
   </div>
+  <ng-container *ngFor="let match of matches">
+    <div *ngIf="!activeGroup || match.groupName == activeGroup" class="match">
+      <div class='group'>Group {{match.groupName}}</div>
+      <div class='date'>{{match.localDate | date:'dd MMM Y HH:mm'}}</div>
+      <div class='team'
+        [ngClass]="{
+          pick: match.homeTeam == entry?.group[match.gameId-1].winner,
+          winner: match.finished && match.homeTeam == entry?.group[match.gameId-1].winner && match.homeScore > match.awayScore,
+          loser: match.finished && match.homeTeam == entry?.group[match.gameId-1].winner && match.homeScore <= match.awayScore
+        }">
+        <div class='name'>{{match.homeTeam}}</div>
+        <div class='flag'>
+          <img src='{{match.homeFlag}}'>
+        </div>
+      </div>
+      <div class='scores'>
+        <div class='prediction'>
+          <div class='title'>Prediction</div>
+          <div class='values'>
+            <input class='score' type='number' [(ngModel)]='entry?.group[match.gameId-1].homeScore' (change)="updateWinner(match)">
+            <input class='score' type='number' [(ngModel)]='entry?.group[match.gameId-1].awayScore' (change)="updateWinner(match)">
+          </div>
+        </div>
+        <div class='actual'>
+          <div class='title'>Actual</div>
+          <div class='values'>
+            <div class='score'>{{match.homeScore}}</div>
+            <div class='score'>{{match.awayScore}}</div>
+          </div>
+        </div>
+      </div>
+      <div class='team'
+        [ngClass]="{
+          pick: match.awayTeam == entry?.group[match.gameId-1].winner,
+          winner: match.finished && match.awayTeam == entry?.group[match.gameId-1].winner && match.homeScore < match.awayScore,
+          loser: match.finished && match.awayTeam == entry?.group[match.gameId-1].winner && match.homeScore >= match.awayScore
+        }">
+        <div class='flag'>
+          <img src='{{match.awayFlag}}'>
+        </div>
+        <div class='name'>{{match.awayTeam}}</div>
+      </div>
+      <div class='points'>{{scoreMatch(match.gameId)}}</div>
+    </div>
+  </ng-container>
 </div>
 <div *ngIf="!entry.locked" class='panel'>
   <div (click)="updateEntry()" class='button'>Update Predictions</div>
