@@ -1,6 +1,6 @@
 <div class='schedule'>
   <div class='panel'>
-    <div (click)="updateEntry()" class='button'>Update Predictions</div>
+    <div *ngIf="!entry.locked" (click)="updateEntry()" class='button'>Update Predictions</div>
     <div class='message'>{{message}}</div>
   </div>
   <div class='headers'>
@@ -16,7 +16,7 @@
   <ng-container *ngFor="let match of matches">
     <div *ngIf="!activeGroup || match.groupName == activeGroup" class="match">
       <div class='group'>Group {{match.groupName}}</div>
-      <div class='date'>{{match.localDate | date:'dd MMM Y HH:mm'}}</div>
+      <div class='date'>{{match.localDate | date:'dd MMM Y HH:mm':'GMT-3'}}</div>
       <div class='team'
         [ngClass]="{
           pick: match.homeTeam == entry?.group[match.gameId-1].winner,
@@ -32,8 +32,8 @@
         <div class='prediction'>
           <div class='title'>Prediction</div>
           <div class='values'>
-            <input class='score' type='number' [(ngModel)]='entry?.group[match.gameId-1].homeScore' (change)="updateWinner(match)">
-            <input class='score' type='number' [(ngModel)]='entry?.group[match.gameId-1].awayScore' (change)="updateWinner(match)">
+            <input class='score' type='number' [readonly]="entry.locked" [(ngModel)]='entry?.group[match.gameId-1].homeScore' (change)="updateWinner(match)">
+            <input class='score' type='number' [readonly]="entry.locked" [(ngModel)]='entry?.group[match.gameId-1].awayScore' (change)="updateWinner(match)">
           </div>
         </div>
         <div class='actual'>

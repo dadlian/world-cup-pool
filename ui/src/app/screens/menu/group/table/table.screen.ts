@@ -47,7 +47,18 @@ export class TableScreen{
 
     let score = 0
     for(let i=0; i < 4; i++){
-      if(actual[i].team == prediction[i].team){
+      let actualGamesPlayed = (
+        actual[i].wins + actual[i].losses + actual[i].draws
+      )
+
+      let predictedGamesPlayed = (
+        prediction[i].wins + prediction[i].losses + prediction[i].draws
+      )
+
+      if(
+        actual[i].team == prediction[i].team &&
+        actualGamesPlayed == predictedGamesPlayed
+      ){
         score++
       }
     }

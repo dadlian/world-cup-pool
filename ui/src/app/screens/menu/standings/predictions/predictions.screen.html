@@ -1,0 +1,62 @@
+<div id='predictions'>
+  <table>
+    <thead>
+      <tr>
+        <th>Match</th>
+        <th *ngFor="let entry of entries">{{entry.name}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let match of matches">
+        <ng-container *ngIf="match">
+          <td>
+            <div class='match'>
+              <div class='teams'>
+                <img [ngClass]="{loser: match.homeScore < match.awayScore}" src="{{match.homeFlag}}" />
+                <span>v</span>
+                <img [ngClass]="{loser: match.awayScore < match.homeScore}" src="{{match.awayFlag}}" />
+              </div>
+              <div *ngIf="match.finished; else date" class='result'>
+                <div class='score'>{{match.homeScore}}</div>
+                <div>-</div>
+                <div class='score'>{{match.awayScore}}</div>
+              </div>
+              <ng-template #date>
+                <div class='date'>
+                  {{match.date | date:'dd MMM Y HH:mm':'GMT-3'}}
+                </div>
+              </ng-template>
+            </div>
+          </td>
+          <td *ngFor="let prediction of predictions[match.id]">
+            <div class='prediction'>
+              <ng-container *ngIf="match.finished; else upcoming">
+                <div *ngIf="prediction.winner; else draw" class='winner' [ngClass]="{
+                  correct: (match.homeScore > match.awayScore && prediction.winner == match.homeTeam) ||
+                           (match.awayScore > match.homeScore && prediction.winner == match.awayTeam),
+                  incorrect: !prediction.winner || match.homeScore == match.awayScore ||
+                             (match.homeScore > match.awayScore && prediction.winner == match.awayTeam) ||
+                             (match.awayScore > match.homeScore && prediction.winner == match.homeTeam)
+                }"><img src="{{flags[prediction.winner]}}" /></div>
+                <ng-template #draw>
+                  <div class='draw' [ngClass]="{
+                    correct: match.homeScore == match.awayScore,
+                    incorrect: match.homeScore != match.awayScore
+                  }">Draw</div>
+                </ng-template>
+                <div class='score' [ngClass]="{
+                  correct: prediction.homeScore == match.homeScore && prediction.awayScore == match.awayScore,
+                  incorrect: prediction.homeScore != match.homeScore || prediction.awayScore != match.awayScore
+                }">{{prediction.homeScore}} - {{prediction.awayScore}}</div>
+              </ng-container>
+              <ng-template #upcoming>
+                <div class='winner'><span>--</span></div>
+                <div class='score'>--</div>
+              </ng-template>
+            </div>
+          </td>
+        </ng-container>
+      </tr>
+    </tbody>
+  </table>
+</div>

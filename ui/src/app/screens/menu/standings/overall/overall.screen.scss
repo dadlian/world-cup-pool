@@ -1,0 +1,33 @@
+#standings{
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  table{
+    border-collapse: collapse;
+    width: 100%;
+
+    th{
+      color: #FFFFFF;
+      padding: 10px;
+      background-color: #3384FF;
+    }
+
+    td{
+      text-align: center;
+      padding: 10px;
+      font-weight: bold;
+    }
+
+    tr.odd{
+      background-color: rgba(51, 132, 255, 0.3);
+    }
+
+    tr.even{
+      background-color: rgba(220, 220, 220, 0.3);
+    }
+  }
+}

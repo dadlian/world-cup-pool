@@ -1,0 +1,120 @@
+table{
+  border-collapse: collapse;
+
+  th{
+    color: #FFFFFF;
+    padding: 10px;
+    background-color: #3384FF;
+  }
+
+  tbody{
+    tr{
+      border-bottom: solid 1px #AAAAAA;
+      td{
+        padding: 10px;
+      }
+    }
+  }
+}
+
+.match{
+  padding-right: 50px;
+
+  .teams{
+    width: 150px;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+
+    img{
+      width: 50px;
+      border: solid 1px #AAAAAA;
+    }
+
+    img.loser{
+      opacity: 0.5;
+    }
+  }
+
+  .result{
+    width: 150px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    margin-top: 5px;
+
+    .score{
+      text-align: center;
+      width: 50px;
+    }
+  }
+
+  .date{
+    text-align: center;
+    width: 150px;
+    margin-top: 15px;
+  }
+}
+
+.prediction{
+  .winner{
+    width: 75px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img{
+      width: 50px;
+      border: solid 1px #AAAAAA;
+    }
+  }
+
+  .winner.correct{
+    img{
+      opacity: 1;
+    }
+  }
+
+  .winner.incorrect{
+    img{
+      opacity: 0.5;
+    }
+  }
+
+  .draw{
+    width: 75px;
+    height: 40px;
+    font-weight: bold;
+    font-size: 1.1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .draw.correct{
+    color: #0ba52d;
+  }
+
+  .draw.incorrect{
+    color: #FF0000;
+  }
+
+  .score{
+    margin-top: 5px;
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.1em;
+  }
+
+  .score.correct{
+    color: #0ba52d;
+  }
+
+  .score.incorrect{
+    color: #FF0000;
+  }
+}
