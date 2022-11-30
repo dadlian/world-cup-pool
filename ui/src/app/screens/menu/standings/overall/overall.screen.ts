@@ -66,46 +66,44 @@ export class OverallScreen{
           }
 
           //Group Table
-          if(entry.locked){
-            let table = this._getGroupTables(entry, matches)
-            for(let group of Object.keys(table)){
-              let score = 0
-              let actual: Array<any> = Object.values(table[group].actual)
-              let prediction: Array<any> = Object.values(table[group].prediction)
+          let table = this._getGroupTables(entry, matches)
+          for(let group of Object.keys(table)){
+            let score = 0
+            let actual: Array<any> = Object.values(table[group].actual)
+            let prediction: Array<any> = Object.values(table[group].prediction)
 
-              actual.sort((a: any, b: any) => {
-                let aRank = a.points + ((a.goalsFor - a.goalsAgainst)/100) + (a.goalsFor / 1000)
-                let bRank = b.points + ((b.goalsFor - b.goalsAgainst)/100) + (b.goalsFor / 1000)
+            actual.sort((a: any, b: any) => {
+              let aRank = a.points + ((a.goalsFor - a.goalsAgainst)/100) + (a.goalsFor / 1000)
+              let bRank = b.points + ((b.goalsFor - b.goalsAgainst)/100) + (b.goalsFor / 1000)
 
-                return bRank - aRank
-              })
+              return bRank - aRank
+            })
 
-              prediction.sort((a: any, b: any) => {
-                let aRank = a.points + ((a.goalsFor - a.goalsAgainst)/100) + (a.goalsFor / 1000)
-                let bRank = b.points + ((b.goalsFor - b.goalsAgainst)/100) + (b.goalsFor / 1000)
+            prediction.sort((a: any, b: any) => {
+              let aRank = a.points + ((a.goalsFor - a.goalsAgainst)/100) + (a.goalsFor / 1000)
+              let bRank = b.points + ((b.goalsFor - b.goalsAgainst)/100) + (b.goalsFor / 1000)
 
-                return bRank - aRank
-              })
+              return bRank - aRank
+            })
 
-              for(let i=0; i < 4; i++){
-                let actualGamesPlayed = (
-                  actual[i].wins + actual[i].losses + actual[i].draws
-                )
+            for(let i=0; i < 4; i++){
+              let actualGamesPlayed = (
+                actual[i].wins + actual[i].losses + actual[i].draws
+              )
 
-                let predictedGamesPlayed = (
-                  prediction[i].wins + prediction[i].losses + prediction[i].draws
-                )
+              let predictedGamesPlayed = (
+                prediction[i].wins + prediction[i].losses + prediction[i].draws
+              )
 
-                if(
-                  actual[i].team == prediction[i].team &&
-                  actualGamesPlayed == predictedGamesPlayed
-                ){
-                  score++
-                }
+              if(
+                actual[i].team == prediction[i].team &&
+                actualGamesPlayed == predictedGamesPlayed
+              ){
+                score++
               }
-
-              groupStandingsScore += score*2
             }
+
+            groupStandingsScore += score*2
           }
 
           this.scores.push({
@@ -130,6 +128,10 @@ export class OverallScreen{
     let matches: any = {}
 
     for(let match of schedule){
+      if(match.type !== "group"){
+        continue;
+      }
+      
       matches[match.gameId] = match
 
       if(Object.keys(table).indexOf(match.groupName) < 0){

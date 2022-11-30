@@ -22,6 +22,10 @@ export class PredictionsScreen{
   ngOnInit(){
     this._schedule.matches().then((matches: any) => {
       for(let match of matches){
+        if(match.type !== "group"){
+          continue;
+        }
+        
         this.matches[match.gameId] = {
           "id": match.gameId,
           "finished": match.finished,

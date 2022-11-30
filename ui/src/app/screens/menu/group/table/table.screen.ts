@@ -38,10 +38,6 @@ export class TableScreen{
   }
 
   scoreGroup(group: string){
-    if(!this.entry.locked){
-      return 0
-    }
-
     let actual = this.getTable(group, 'actual')
     let prediction = this.getTable(group, 'prediction')
 
@@ -74,6 +70,10 @@ export class TableScreen{
         let matches: any = {}
 
         for(let match of schedule){
+          if(match.type !== "group"){
+            continue
+          }
+
           matches[match.gameId] = match
 
           if(Object.keys(table).indexOf(match.groupName) < 0){

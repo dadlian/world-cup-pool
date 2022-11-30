@@ -1,0 +1,72 @@
+<div id='tables'>
+  <div class='headings'>
+    <div class='heading'>
+      <span>Actual</span>
+    </div>
+    <div class='heading'>
+      <select [(ngModel)]="activeEntry">
+        <option *ngFor="let entry of entries">{{entry.name}}</option>
+      </select>
+    </div>
+  </div>
+  <div class='tables'>
+    <div class='column'>
+      <table class="table" *ngFor="let group of groups">
+        <thead>
+          <tr>
+            <th colspan="2">Group {{group}}</th>
+            <th>W</th>
+            <th>D</th>
+            <th>L</th>
+            <th>GF</th>
+            <th>GA</th>
+            <th>Pts</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let entry of getTable(group, 'actual')">
+            <td><img src='{{entry.flag}}' /></td>
+            <td>{{entry.team}}</td>
+            <td>{{entry.wins}}</td>
+            <td>{{entry.draws}}</td>
+            <td>{{entry.losses}}</td>
+            <td>{{entry.goalsFor}}</td>
+            <td>{{entry.goalsAgainst}}</td>
+            <td>{{entry.points}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class='column'>
+      <table class="table" *ngFor="let group of groups">
+        <thead>
+          <tr>
+            <th colspan="2">Group {{group}}</th>
+            <th>W</th>
+            <th>D</th>
+            <th>L</th>
+            <th>GF</th>
+            <th>GA</th>
+            <th>Pts</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let entry of getTable(group, 'predictions', activeEntry)"
+              [ngClass]="{
+                correct: entry.final && entry.correct,
+                incorrect: entry.final && !entry.correct
+              }">
+            <td><img src='{{entry.flag}}' /></td>
+            <td>{{entry.team}}</td>
+            <td>{{entry.wins}}</td>
+            <td>{{entry.draws}}</td>
+            <td>{{entry.losses}}</td>
+            <td>{{entry.goalsFor}}</td>
+            <td>{{entry.goalsAgainst}}</td>
+            <td>{{entry.points}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

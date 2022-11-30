@@ -19,6 +19,11 @@ const routes: Routes = [
           './predictions/predictions.module').then( m => m.PredictionsModule)
       },
       {
+        path: 'tables',
+        loadChildren: () => import(
+          './tables/tables.module').then( m => m.TablesModule)
+      },
+      {
         path: '**',
         redirectTo: 'overall',
         pathMatch: 'full'

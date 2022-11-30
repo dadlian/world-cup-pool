@@ -1,6 +1,6 @@
 <div class='schedule'>
   <div class='panel'>
-    <div *ngIf="!entry.locked" (click)="updateEntry()" class='button'>Update Predictions</div>
+    <!-- div *ngIf="!entry.locked" (click)="updateEntry()" class='button'>Update Predictions</div -->
     <div class='message'>{{message}}</div>
   </div>
   <div class='headers'>
@@ -32,8 +32,8 @@
         <div class='prediction'>
           <div class='title'>Prediction</div>
           <div class='values'>
-            <input class='score' type='number' [readonly]="entry.locked" [(ngModel)]='entry?.group[match.gameId-1].homeScore' (change)="updateWinner(match)">
-            <input class='score' type='number' [readonly]="entry.locked" [(ngModel)]='entry?.group[match.gameId-1].awayScore' (change)="updateWinner(match)">
+            <input class='score' type='number' readonly="readonly" [(ngModel)]='entry?.group[match.gameId-1].homeScore' (change)="updateWinner(match)">
+            <input class='score' type='number' readonly="readonly" [(ngModel)]='entry?.group[match.gameId-1].awayScore' (change)="updateWinner(match)">
           </div>
         </div>
         <div class='actual'>
@@ -59,7 +59,7 @@
     </div>
   </ng-container>
 </div>
-<div *ngIf="!entry.locked" class='panel'>
+<!-- div *ngIf="!entry.locked" class='panel'>
   <div (click)="updateEntry()" class='button'>Update Predictions</div>
   <div class='message'>{{message}}</div>
-</div>
+</div -->

@@ -40,9 +40,13 @@ export class MatchesScreen{
 
   ngOnInit(){
       this._schedule.matches().then((matches: any) => {
-        this.matches = matches
+        for(let match of matches){
+          if(match.type !== "group"){
+            continue
+          }
 
-        for(let match of this.matches){
+          this.matches.push(match)
+
           this.scores[match.gameId] = {
             "finished": match.finished,
             "homeTeam": match.homeTeam,
@@ -51,6 +55,8 @@ export class MatchesScreen{
             "awayTeam": match.awayTeam
           }
         }
+
+        console.log(this.matches)
       })
 
       this._entry.getBySecret(this._entry.getSecret()).then((entry: any) => {
