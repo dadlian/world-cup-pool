@@ -16,11 +16,13 @@
       $data["name"] = $entry->getName();
       $data["secret"] = $entry->getSecret();
       $data["locked"] = $entry->getLocked();
+      $data["group"] = $entry->getGroup();
 
       $sqlGateway = new SQLGateway();
 
+      /*
       if(!$entry->isLocked()){
-        $group = $entry->getGroup();
+	$group = $entry->getGroup();
         $sqlGateway = new SQLGateway();
         $searcher = new Searcher();
 
@@ -41,6 +43,34 @@
         $data["group"] = $group;
       }else{
         $data["group"] = $entry->getGroup();
+      }
+      */
+
+      if(!$entry->isLocked()){
+        $knockout = $entry->getKnockout();
+        $sqlGateway = new SQLGateway();
+        $searcher = new Searcher();
+
+        foreach($data["knockout"] as $predictionData){
+          $searcher->clearCriteria();
+          $searcher->addCriterion("matchId", Criterion::EQUAL, $predictionData["matchId"]);
+          $searcher->addCriterion("Entry", $entry->getId(), "knockout");
+
+          $prediction = $sqlGateway->findUnique("Prediction", $searcher);
+	  if(!$prediction){
+	  	$prediction = new Prediction();
+	  }
+
+          $prediction->build($predictionData);
+
+          if(!$prediction->hasBuildErrors()){
+            $knockout[$prediction->getMatchId()] = $prediction;
+          }
+        }
+
+        $data["knockout"] = $knockout;
+      }else{
+        $data["knockout"] = $entry->getKnockout();
       }
 
       $entry->build($data);

@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  api: `http://localhost/cup_pool`
+  api: `https://dev.kycsar.com/pool-api`
 };

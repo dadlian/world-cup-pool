@@ -1,5 +1,141 @@
-h2{
-  font-size: 1.25em;
-  text-align: center;
-  margin-top: 50px;
+#knockout{
+  padding-bottom: 50px;
+
+  h1{
+    text-align: center;
+    font-size: 1.5em;
+    margin-bottom: 50px;
+  }
+
+  .headings{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+
+    .heading{
+      font-weight: bold;
+      width: 220px;
+      text-align: center;
+    }
+  }
+
+  .bracket{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+
+    .round{
+      height: 1250px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .round.R16{
+      height: 1250px;
+    }
+
+    .round.Q{
+      height: 1100px;
+    }
+
+    .round.S{
+      height: 800px;
+    }
+
+    .round.F{
+      height: 200px;
+    }
+
+    .match{
+      .date{
+        font-weight: bold;
+        color: #FFFFFF;
+        background-color: #3384FF;
+        padding: 5px;
+      }
+
+      .team{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 220px;
+        background-color: #EEEEEE;
+        border-top:1px solid #CCCCCC;
+        cursor: pointer;
+        padding: 0px 10px;
+        opacity: 0.5;
+
+        .participant{
+          height: 40px;
+          padding: 10px 0px;
+          width: 150px;
+          display: flex;
+          align-items: center;
+
+          img{
+            width: 40px;
+            padding-right: 10px;
+          }
+
+          .name{
+            font-weight: bold;
+          }
+        }
+
+        .score{
+          width: 40px;
+          padding: 5px;
+          text-align: center;
+          font-weight:bold;
+        }
+
+        .score::-webkit-outer-spin-button,
+        .score::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+
+        .score[type=number] {
+          -moz-appearance: textfield;
+        }
+      }
+
+      .team.winner{
+        opacity: 1;
+      }
+    }
+
+    .match.third{
+      position: absolute;
+      right: 0px;
+      bottom: 400px;
+    }
+  }
+
+  .panel{
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    margin: 25px 0px;
+
+    .button{
+      background-color: #3384ff;
+      color: #FFFFFF;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .button:hover{
+      opacity: 0.8;
+    }
+  }
+
+  .message{
+    margin-top: 10px;
+    color: #1FDF64;
+    font-weight: bold;
+  }
 }

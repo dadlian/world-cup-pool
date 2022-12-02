@@ -60,7 +60,7 @@ export class EntryService{
   update(secret: string, predictions: Array<any>): Promise<boolean>{
     return new Promise<boolean>((resolve, reject) => {
       this._httpClient.put(`/entries/${secret}`,
-        { group: predictions },
+        { knockout: predictions },
         { observe: 'response' }
       )
       .pipe(

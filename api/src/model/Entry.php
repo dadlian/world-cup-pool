@@ -11,6 +11,9 @@
     /** @Collection(type=@WadapiObject(class='Prediction'), required=true) */
     protected $group;
 
+    /** @Collection(type=@WadapiObject(class='Prediction'), required=true) */
+    protected $knockout;
+
     /** @Boolean(required=true) */
     protected $locked;
 

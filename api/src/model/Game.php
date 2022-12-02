@@ -35,6 +35,9 @@
     /** @WadapiString(required=true) */
     protected $homeFlag;
 
+    /** @WadapiString */
+    protected $winner;
+
     public static function getURITemplate(){
       return "/games/{id}";
     }

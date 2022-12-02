@@ -26,6 +26,8 @@ export class OverallScreen{
           "homeScore": match.homeScore,
           "awayTeam": match.awayTeam,
           "awayScore": match.awayScore,
+          "group": match.groupName,
+          "winner": match.winner
         }
       }
 
@@ -38,7 +40,7 @@ export class OverallScreen{
           let groupResultsScore = 0
           let groupStandingsScore = 0
           let knockoutResultsScore = 0
-          let knockoutStandingsScore = 0
+          let knockoutBracketScore = 0
 
           //Group Results
           for(let prediction of entry.group){
@@ -106,13 +108,44 @@ export class OverallScreen{
             groupStandingsScore += score*2
           }
 
+          //Knockout Results
+          for(let prediction of entry.knockout){
+            let score = scores[prediction.matchId]
+
+            if(score.finished){
+              let multiplier = 1
+              if(score.group == "R16"){
+                multiplier = 2
+              }else if(score.group == "Q"){
+                multiplier = 4
+              }else if(score.group == "S"){
+                multiplier = 8
+              }else if(score.group == "T"){
+                multiplier = 4
+              }else if(score.group == "F"){
+                multiplier = 12
+              }
+
+              if(score.winner == prediction.winner){
+                knockoutBracketScore += multiplier
+              }
+
+              if(
+                score.homeScore  == prediction.homeScore &&
+                score.awayScore  == prediction.awayScore
+              ){
+                knockoutResultsScore += 1
+              }
+            }
+          }
+
           this.scores.push({
             name: entry.name,
             groupResults: groupResultsScore,
             groupStandings: groupStandingsScore,
             knockoutResults: knockoutResultsScore,
-            knockoutStandings: knockoutStandingsScore,
-            total: groupResultsScore+groupStandingsScore+knockoutResultsScore+knockoutStandingsScore
+            knockoutStandings: knockoutBracketScore,
+            total: groupResultsScore+groupStandingsScore+knockoutResultsScore+knockoutBracketScore
           })
         }
 
@@ -131,7 +164,7 @@ export class OverallScreen{
       if(match.type !== "group"){
         continue;
       }
-      
+
       matches[match.gameId] = match
 
       if(Object.keys(table).indexOf(match.groupName) < 0){

@@ -24,6 +24,11 @@ const routes: Routes = [
           './tables/tables.module').then( m => m.TablesModule)
       },
       {
+        path: 'bracket',
+        loadChildren: () => import(
+          './bracket/bracket.module').then( m => m.BracketModule)
+      },
+      {
         path: '**',
         redirectTo: 'overall',
         pathMatch: 'full'

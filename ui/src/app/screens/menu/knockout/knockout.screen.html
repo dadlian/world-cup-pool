@@ -1,3 +1,51 @@
-<div class='knockout'>
-  <h2>Knockout bracket available 2nd December</h2>
+<div id='knockout'>
+  <h1>{{entry.name}}'s Bracket</h1>
+  <div class='headings'>
+    <div class='heading'>Round of 16</div>
+    <div class='heading'>Quarterfinals</div>
+    <div class='heading'>Semifinals</div>
+    <div class='heading'>Finals</div>
+  </div>
+  <div class='bracket'>
+    <div *ngFor="let round of rounds;" class='round' [ngClass]="round">
+      <div *ngFor="let match of matches[round]" class='match'>
+        <div class='date'>{{match.localDate | date:'dd MMM Y HH:mm':'GMT-3'}}</div>
+        <div class='team' [ngClass]="{winner: getParticipants(match.gameId).home.name == entry.knockout[match.gameId-49].winner}">
+          <div class='participant' (click)="pickWinner(match.gameId-49, getParticipants(match.gameId).home.name, getParticipants(match.gameId).away.name)">
+            <div class='flag'><img [src]="getParticipants(match.gameId).home.flag" /></div>
+            <div class='name'>{{getParticipants(match.gameId).home.name}}</div>
+          </div>
+          <input class='score' type='number' [(ngModel)]="entry.knockout[match.gameId-49].homeScore"/>
+        </div>
+        <div class='team' [ngClass]="{winner: getParticipants(match.gameId).away.name == entry.knockout[match.gameId-49].winner}">
+          <div class='participant' (click)="pickWinner(match.gameId-49, getParticipants(match.gameId).away.name, getParticipants(match.gameId).home.name)">
+            <div class='flag'><img [src]="getParticipants(match.gameId).away.flag" /></div>
+            <div class='name'>{{getParticipants(match.gameId).away.name}}</div>
+          </div>
+          <input class='score' type='number' [(ngModel)]="entry.knockout[match.gameId-49].awayScore" />
+        </div>
+      </div>
+    </div>
+    <div class='match third'>
+      <div class='date'>{{thirdPlace?.localDate | date:'dd MMM Y HH:mm':'GMT-3'}} (Third)</div>
+      <div class='team' [ngClass]="{winner: getParticipants(thirdPlace.gameId).home.name == entry.knockout[thirdPlace.gameId-49].winner}">
+        <div class='participant' (click)="pickWinner(thirdPlace?.gameId-49, getParticipants(thirdPlace?.gameId).home.name, getParticipants(thirdPlace?.gameId).away.name)">
+          <div class='flag'><img [src]="getParticipants(thirdPlace?.gameId).home.flag" /></div>
+          <div class='name'>{{getParticipants(thirdPlace?.gameId).home.name}}</div>
+        </div>
+        <input class='score' type='number' [(ngModel)]="entry.knockout[thirdPlace?.gameId-49].homeScore"/>
+      </div>
+      <div class='team' [ngClass]="{winner: getParticipants(thirdPlace.gameId).away.name == entry.knockout[thirdPlace.gameId-49].winner}">
+        <div class='participant' (click)="pickWinner(thirdPlace?.gameId-49, getParticipants(thirdPlace?.gameId).away.name, getParticipants(thirdPlace?.gameId).home.name)">
+          <div class='flag'><img [src]="getParticipants(thirdPlace?.gameId).away.flag" /></div>
+          <div class='name'>{{getParticipants(thirdPlace?.gameId).away.name}}</div>
+        </div>
+        <input class='score' type='number' [(ngModel)]="entry.knockout[thirdPlace?.gameId-49].awayScore" />
+      </div>
+    </div>
+  </div>
+  <div class='panel'>
+    <div class='message'>{{message}}</div>
+    <div class='button' (click)='saveBracket()'>Save Bracket</div>
+  </div>
 </div>

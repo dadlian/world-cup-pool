@@ -24,11 +24,12 @@
   },
   "production":{
     "database":{
-      "hostname":"",
-      "database":"",
-      "username":"",
-      "password":"",
-      "prefix":""
+      "hostname":"pool.mysql",
+      "database":"worldcup_pool",
+      "username":"guest",
+      "password":"guest",
+      "prefix":"",
+      "driver":"mysql"
     },
     "messaging":{
       "hostname":"",
@@ -38,10 +39,10 @@
       "exchange":""
     },
     "install":{
-      "url":""
+      "url":"dev.kycsar.com/pool-api"
     },
     "logging":{
-      "level":""
+      "level":"debug"
     }
   }
 }

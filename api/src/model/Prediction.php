@@ -8,6 +8,9 @@
     /** @WadapiString */
     protected $winner;
 
+    /** @WadapiString */
+    protected $loser;
+
     /** @Integer(required=true) */
     protected $homeScore;
 

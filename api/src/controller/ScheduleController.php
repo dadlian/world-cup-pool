@@ -22,7 +22,8 @@
       $curl = curl_init();
 
       // Authenticate API
-      curl_setopt($curl, CURLOPT_URL, "http://api.cup2022.ir/api/v1/user/login");
+      curl_setopt($curl, CURLOPT_URL, "http://wc2022.kycsar.com/api/v1/user/login");
+      curl_setopt($curl, CURLOPT_POST, 1);
       curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode(array(
         "email"=>"sveninem@gmail.com",
         "password"=>"g0T1T4n$"
@@ -31,7 +32,11 @@
       curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
       curl_setopt($curl, CURLOPT_RETURNTRANSFER, true );
 
-      $CUP_TOKEN = json_decode(curl_exec($curl), true)["data"]["token"];
+      var_dump(curl_exec($curl));
+      var_dump(curl_error($curl));
+      exit;
+
+      #$CUP_TOKEN = json_decode(curl_exec($curl), true)["data"]["token"];
 
       // Retrieve Schedule
       $curl = curl_init();

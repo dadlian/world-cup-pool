@@ -1,0 +1,81 @@
+<div id='bracket'>
+  <div class='headings'>
+    <div class='heading'>
+      <select [(ngModel)]="activeEntry">
+        <option *ngFor="let entry of entries">{{entry.name}}</option>
+      </select>
+    </div>
+  </div>
+  <div id='knockout'>
+    <div class='headings'>
+      <div class='heading'>Round of 16</div>
+      <div class='heading'>Quarterfinals</div>
+      <div class='heading'>Semifinals</div>
+      <div class='heading'>Finals</div>
+    </div>
+    <div class='bracket'>
+      <div *ngFor="let round of rounds;" class='round' [ngClass]="round">
+        <div *ngFor="let match of matches[round]" class='match'>
+          <div class='date'>{{match.localDate | date:'dd MMM Y HH:mm':'GMT-3'}}</div>
+          <div class='team' [ngClass]="{
+            prediction: getParticipants(match.gameId).home.name == entryMap[activeEntry]?.knockout[match.gameId-49].winner
+          }">
+            <div class='participant' [ngClass]="{
+              winner: match.finished && match.winner == getParticipants(match.gameId).home.name,
+              loser: match.finished && match.winner != getParticipants(match.gameId).home.name,
+              eliminated: getParticipants(match.gameId).home.name != entryMap[activeEntry]?.knockout[match.gameId-49].winner && getParticipants(match.gameId).home.name != entryMap[activeEntry]?.knockout[match.gameId-49].loser
+            }">
+              <div class='flag'><img [src]="getParticipants(match.gameId).home.flag" /></div>
+              <div class='name'>{{getParticipants(match.gameId).home.name}}</div>
+            </div>
+            <div class='score' [ngClass]="{
+              correct: match.finished && match.homeScore == entryMap[activeEntry]?.knockout[match.gameId-49].homeScore,
+              incorrect: match.finished && match.homeScore != entryMap[activeEntry]?.knockout[match.gameId-49].homeScore
+            }" type='number'>{{entryMap[activeEntry]?.knockout[match.gameId-49].homeScore}}</div>
+          </div>
+          <div class='team' [ngClass]="{
+            prediction: getParticipants(match.gameId).away.name == entryMap[activeEntry]?.knockout[match.gameId-49].winner
+          }">
+            <div class='participant' [ngClass]="{
+              winner: match.finished && match.winner == getParticipants(match.gameId).away.name,
+              loser: match.finished && match.winner != getParticipants(match.gameId).away.name
+            }">
+              <div class='flag'><img [src]="getParticipants(match.gameId).away.flag" /></div>
+              <div class='name'>{{getParticipants(match.gameId).away.name}}</div>
+            </div>
+            <div class='score' [ngClass]="{
+              correct: match.finished && match.homeScore == entryMap[activeEntry]?.knockout[match.gameId-49].awayScore,
+              incorrect: match.finished && match.homeScore != entryMap[activeEntry]?.knockout[match.gameId-49].awayScore
+            }" type='number'>{{entryMap[activeEntry]?.knockout[match.gameId-49].awayScore}}</div>
+          </div>
+        </div>
+      </div>
+      <div class='match third'>
+        <div class='date'>{{thirdPlace?.localDate | date:'dd MMM Y HH:mm':'GMT-3'}} (Third)</div>
+        <div class='team' [ngClass]="{prediction: getParticipants(thirdPlace.gameId).home.name == entryMap[activeEntry]?.knockout[thirdPlace.gameId-49].winner}">
+          <div class='participant' [ngClass]="{
+            winner: thirdPlace.finished && thirdPlace.winner == getParticipants(thirdPlace.gameId).home.name,
+            loser: thirdPlace.finished && thirdPlace.winner != getParticipants(thirdPlace.gameId).home.name
+          }">
+            <div class='flag'><img [src]="getParticipants(thirdPlace?.gameId).home.flag" /></div>
+            <div class='name'>{{getParticipants(thirdPlace?.gameId).home.name}}</div>
+          </div>
+          <div class='score' [ngClass]="{
+            correct: thirdPlace.finished && thirdPlace.homeScore == entryMap[activeEntry]?.knockout[thirdPlace.gameId-49].homeScore,
+            incorrect: thirdPlace.finished && thirdPlace.homeScore != entryMap[activeEntry]?.knockout[thirdPlace.gameId-49].homeScore
+          }" type='number'>{{entryMap[activeEntry]?.knockout[thirdPlace.gameId-49].homeScore}}</div>
+        </div>
+        <div class='team' [ngClass]="{prediction: getParticipants(thirdPlace.gameId).away.name == entryMap[activeEntry]?.knockout[thirdPlace.gameId-49].winner}">
+          <div class='participant' [ngClass]="{
+            winner: thirdPlace.finished && thirdPlace.winner == getParticipants(thirdPlace.gameId).away.name,
+            loser: thirdPlace.finished && thirdPlace.winner != getParticipants(thirdPlace.gameId).away.name
+          }">
+            <div class='flag'><img [src]="getParticipants(thirdPlace?.gameId).away.flag" /></div>
+            <div class='name'>{{getParticipants(thirdPlace?.gameId).away.name}}</div>
+          </div>
+          <div class='score' type='number'>{{entryMap[activeEntry]?.knockout[thirdPlace.gameId-49].awayScore}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

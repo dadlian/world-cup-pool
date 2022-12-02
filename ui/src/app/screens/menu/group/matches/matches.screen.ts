@@ -55,8 +55,6 @@ export class MatchesScreen{
             "awayTeam": match.awayTeam
           }
         }
-
-        console.log(this.matches)
       })
 
       this._entry.getBySecret(this._entry.getSecret()).then((entry: any) => {
