@@ -23,7 +23,7 @@
             <div class='participant' [ngClass]="{
               winner: match.finished && match.winner == getParticipants(match.gameId).home.name,
               loser: match.finished && match.winner != getParticipants(match.gameId).home.name,
-              eliminated: getParticipants(match.gameId).home.name != entryMap[activeEntry]?.knockout[match.gameId-49].winner && getParticipants(match.gameId).home.name != entryMap[activeEntry]?.knockout[match.gameId-49].loser
+              eliminated: getParticipants(match.gameId).home.name != entryMap[activeEntry]?.knockout[match.gameId-49].winner && getParticipants(match.gameId).away.name != entryMap[activeEntry]?.knockout[match.gameId-49].winner
             }">
               <div class='flag'><img [src]="getParticipants(match.gameId).home.flag" /></div>
               <div class='name'>{{getParticipants(match.gameId).home.name}}</div>

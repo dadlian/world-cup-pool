@@ -44,7 +44,7 @@
       </div>
     </div>
   </div>
-  <div class='panel'>
+  <div *ngIf="!entry.locked" class='panel'>
     <div class='message'>{{message}}</div>
     <div class='button' (click)='saveBracket()'>Save Bracket</div>
   </div>
